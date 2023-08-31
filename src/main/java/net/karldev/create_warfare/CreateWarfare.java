@@ -1,6 +1,10 @@
 package net.karldev.create_warfare;
 
 import com.mojang.logging.LogUtils;
+import net.karldev.create_warfare.item.ModCreativeModeTabs;
+import net.karldev.create_warfare.item.ModItems;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -19,14 +23,16 @@ import org.slf4j.Logger;
 @Mod(CreateWarfare.MOD_ID)
 public class CreateWarfare
 {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "create_warfare";
-    // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public CreateWarfare()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
